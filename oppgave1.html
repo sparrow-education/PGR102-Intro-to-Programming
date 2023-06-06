@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oppgave 1</title>
+    <link rel="stylesheet" type="text/css" href="css/oppgave1.css" />
+  </head>
+  <body>
+    <!-- Det er lov å endre/legge til HTML -->
+
+    <h1>Modern Art Maker</h1>
+
+    <label>Bredde</label>
+    <input id="width-txt" type="text" />
+
+    <label>Høyde</label>
+    <input id="height-txt" type="text" />
+
+    <hr />
+
+    <label>Farge</label>
+    <input id="background-color-txt" type="text" />
+
+    <hr />
+
+    <label>Posisjon fra venstre (left)</label>
+    <input id="left-txt" type="number" />
+
+    <label>Posisjon fra toppen (top)</label>
+    <input id="top-txt" type="number" />
+
+    <hr />
+
+    <input id="add-box-btn" type="button" value="Legg til" />
+
+    <p id="status-p">Antall bokser lagt til:</p>
+
+    <div id="output-div"></div>
+    <p id="output-p"></p>
+
+    <script>
+      //HTML
+      var widthTxt = document.getElementById("width-txt");
+      var heightTxt = document.getElementById("height-txt");
+      var colorTxt = document.getElementById("background-color-txt");
+      var leftTxt = document.getElementById("left-txt");
+      var topTxt = document.getElementById("top-txt");
+      var btnAddElement = document.getElementById("add-box-btn");
+      var addedBoxStatus = document.getElementById("status-p");
+      var outputDiv = document.getElementById("output-div");
+      var outputP = document.getElementById("output-p");
+      var countBox = 0;
+      
+      
+      //Function
+      function showArt() {
+        //Value input from user
+        var inputWidth = Number(widthTxt.value);
+        var inputHeight = Number(heightTxt.value);
+        var inputColor = colorTxt.value;
+        var inputLeft = leftTxt.value;
+        var inputTop = topTxt.value;
+
+        //Need input from user to create elements
+        if (inputWidth === 0 && inputHeight === 0 && inputColor === "") {
+
+          htmlTxt = `
+          <p><strong>Add values to become Van Gogh<strong><p>
+          `;
+          outputP.innerHTML = htmlTxt;
+
+        } else if ( inputWidth > 0 && inputHeight > 0 && inputColor != "") {
+
+          outputP.innerHTML = "";
+          //Adding 1 for everytime showArt function is clicked
+          countBox += 1;
+          addedBoxStatus.innerHTML = `
+            Antall bokser lagt til: ${countBox}
+            `;
+          //Using template literals to assign the value given from user
+          artByUser = `
+            <div style="width:${inputWidth}px; height:${inputHeight}px; background-color:${inputColor};left:${inputLeft}px; top:${inputTop}px;"></div>
+            `;
+          outputDiv.innerHTML += artByUser;
+        }
+      }
+      //Event
+      btnAddElement.onclick = showArt;
+
+    </script>
+  </body>
+</html>
